@@ -15,9 +15,15 @@ const UserSchema = new Schema(
     }
 )
 
-UserSchema.static("findAll", async function (id) {
-    const book = await UserModal.findOne({ _id: id }).populate("authors")
-    return book
+UserSchema.static("addToDoListOnUser", async function (id, todoId) {
+    await UserModal.findByIdAndUpdate(
+        {
+            _id: id
+        },
+        {
+            $addToSet: { todolist: todoId }
+        }
+    )
 })
 
 const UserModal = mongoose.model("user", UserSchema)

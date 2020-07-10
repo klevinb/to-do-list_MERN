@@ -54,6 +54,13 @@ deleteToDoListByID = async (req, res) => {
     res.status(200).send(deletedMeeting._id)
 }
 
+// Add todo
+
+addToDoAtUser = async (req, res) => {
+    await UserSchema.addToDoListOnUser(req.params.id, req.body.todoId)
+    res.status(201).send("To-do added")
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
@@ -64,6 +71,7 @@ module.exports = {
     getToDoListById,
     addNewToDoList,
     editToDoListById,
-    deleteToDoListByID
+    deleteToDoListByID,
+    addToDoAtUser
 }
 
